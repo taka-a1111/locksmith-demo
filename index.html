@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ロックスミス｜湘南・藤沢のITネットワークサポート｜直らなければ0円</title>
+<meta name="description" content="神奈川県藤沢市を中心に湘南エリアのご家庭・店舗のWi-Fi/ネットトラブルを出張解決。直らなければ出張費も含めて0円。金融系ネットワークを手がける現役ITプロが、専門用語を使わず分かりやすく対応します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A2540;
+  --ink:#10263F;
+  --primary:#1565D8;
+  --primary-d:#0E4FB0;
+  --primary-l:#4D96F2;
+  --sky:#EAF2FD;
+  --sky2:#F5F9FF;
+  --line:#DCE7F3;
+  --text:#1F2D3D;
+  --text-mid:#56657A;
+  --text-light:#8A98AB;
+  --white:#FFFFFF;
+  --accent:#12B886;
+  --accent-d:#0CA678;
+  --accent-pale:#E7F8F1;
+  --warn:#F08C00;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(10,37,64,.08);
+  --shadow-lg:0 20px 50px rgba(10,37,64,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  color:var(--text);
+  background:var(--white);
+  line-height:1.85;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.zen{font-family:"Zen Kaku Gothic New",sans-serif}
+section{position:relative}
+
+/* ===== DEMO bar ===== */
+.demo-bar{
+  position:fixed;top:0;left:0;width:100%;z-index:300;
+  background:repeating-linear-gradient(45deg,#ffd43b,#ffd43b 14px,#fab005 14px,#fab005 28px);
+  color:#3d2c00;text-align:center;font-size:11.5px;font-weight:700;
+  padding:4px 10px;letter-spacing:.04em;
+}
+
+/* ===== Header ===== */
+.site-header{
+  position:fixed;top:23px;left:0;width:100%;z-index:200;
+  transition:.3s;background:rgba(255,255,255,.0);
+}
+.site-header.scrolled{background:rgba(255,255,255,.96);box-shadow:0 4px 20px rgba(10,37,64,.08);backdrop-filter:blur(8px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:62px;max-width:1100px;margin:0 auto;padding:0 24px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:38px;height:38px;flex:none;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-d));display:grid;place-items:center;box-shadow:0 6px 14px rgba(21,101,216,.35)}
+.logo-mark svg{width:22px;height:22px;color:#fff}
+.logo-txt{line-height:1.15}
+.logo-txt b{font-size:19px;font-weight:900;color:var(--navy);letter-spacing:.02em;display:block}
+.scrolled .logo-txt b,.scrolled .logo-en{color:var(--navy)}
+.logo-en{font-size:10px;color:var(--primary);letter-spacing:.18em;font-weight:700}
+.hero-on .logo-txt b{color:#fff}
+.hero-on .logo-en{color:#bcd6ff}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a.navlink{font-size:14px;font-weight:500;color:var(--navy);transition:.2s}
+.hero-on .nav a.navlink{color:#eaf2fd}
+.scrolled .nav a.navlink{color:var(--navy)}
+.nav a.navlink:hover{color:var(--primary)}
+.header-cta{background:var(--accent);color:#fff!important;padding:11px 20px;border-radius:999px;font-weight:700;font-size:14px;box-shadow:0 8px 18px rgba(18,184,134,.35);transition:.2s}
+.header-cta:hover{transform:translateY(-2px);background:var(--accent-d)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.burger span{width:26px;height:2px;background:var(--navy);transition:.3s}
+.hero-on .burger span{background:#fff}
+.scrolled .burger span{background:var(--navy)}
+
+/* ===== Hero ===== */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  background:radial-gradient(1200px 700px at 80% -10%,#1f74e8 0%,transparent 60%),linear-gradient(160deg,#0A2540 0%,#0E3A6B 55%,#1565D8 130%);
+  color:#fff;padding:120px 0 70px;overflow:hidden;
+}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:26px 26px;opacity:.5}
+.hero-grid{width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:7px 16px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:22px;backdrop-filter:blur(4px)}
+.hero-badge svg{width:15px;height:15px;color:#7fffcf}
+.hero h1{font-size:clamp(30px,5.2vw,54px);font-weight:900;line-height:1.32;letter-spacing:.01em;margin-bottom:22px}
+.hero h1 .free{color:#23e0a0;text-shadow:0 0 30px rgba(35,224,160,.35)}
+.hero h1 .u{position:relative;white-space:nowrap}
+.hero h1 .u::after{content:"";position:absolute;left:0;bottom:2px;width:100%;height:11px;background:rgba(35,224,160,.28);z-index:-1;border-radius:4px}
+.hero p.lead{font-size:clamp(14px,1.7vw,16.5px);color:#d6e6fb;line-height:1.95;margin-bottom:18px;max-width:560px;font-weight:400}
+.hero .area{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#bcd6ff;border-left:3px solid #23e0a0;padding-left:12px;margin-bottom:32px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:999px;padding:16px 30px;font-size:15.5px;transition:.25s;cursor:pointer;border:none}
+.btn svg{width:19px;height:19px}
+.btn-accent{background:var(--accent);color:#fff;box-shadow:0 12px 26px rgba(18,184,134,.4)}
+.btn-accent:hover{transform:translateY(-3px);background:var(--accent-d)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.btn-ghost:hover{background:rgba(255,255,255,.2);transform:translateY(-3px)}
+
+/* hero visual */
+.hero-visual{position:relative}
+.hv-card{background:rgba(255,255,255,.97);color:var(--text);border-radius:20px;padding:26px 26px 22px;box-shadow:var(--shadow-lg)}
+.hv-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px dashed var(--line)}
+.hv-row:last-child{border-bottom:none}
+.hv-ico{width:42px;height:42px;flex:none;border-radius:12px;background:var(--sky);display:grid;place-items:center;color:var(--primary)}
+.hv-ico svg{width:23px;height:23px}
+.hv-row b{font-size:14.5px;color:var(--navy);font-weight:700}
+.hv-row span{font-size:12.5px;color:var(--text-mid);display:block;line-height:1.6}
+.hv-tag{display:inline-block;background:var(--accent-pale);color:var(--accent-d);font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px;margin-top:5px}
+.hv-float{position:absolute;right:-12px;top:-22px;background:#23e0a0;color:#063;font-weight:900;font-size:13px;padding:10px 16px;border-radius:14px;box-shadow:0 12px 24px rgba(35,224,160,.4);transform:rotate(4deg)}
+
+/* wave divider */
+.wave{display:block;width:100%;height:60px;margin-top:-1px}
+
+/* ===== Section heads ===== */
+.sec{padding:84px 0}
+.sec.alt{background:var(--sky2)}
+.sec-head{text-align:center;margin-bottom:50px}
+.sec-tag{display:inline-block;font-size:13px;font-weight:700;color:var(--primary);letter-spacing:.16em;margin-bottom:10px}
+.sec-head h2{font-size:clamp(24px,3.6vw,34px);font-weight:900;color:var(--navy);line-height:1.4}
+.sec-head p{color:var(--text-mid);margin-top:14px;font-size:15px}
+.hl{color:var(--primary)}
+.hl-g{color:var(--accent-d)}
+
+/* ===== Reasons ===== */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.reason{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px 26px;text-align:center;transition:.3s;position:relative;overflow:hidden}
+.reason::before{content:"";position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg,var(--primary),var(--primary-l))}
+.reason:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.reason .num{font-size:13px;font-weight:700;color:var(--primary-l);letter-spacing:.1em}
+.reason .ico{width:72px;height:72px;margin:14px auto 18px;border-radius:50%;background:var(--sky);display:grid;place-items:center;color:var(--primary)}
+.reason .ico svg{width:36px;height:36px}
+.reason h3{font-size:19px;font-weight:900;color:var(--navy);margin-bottom:12px;line-height:1.4}
+.reason p{font-size:14px;color:var(--text-mid);text-align:left;line-height:1.85}
+
+/* ===== Why 0yen ===== */
+.why{background:linear-gradient(160deg,#0A2540,#103e72);color:#fff;border-radius:24px;padding:54px 50px;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.why h3{font-size:clamp(21px,3vw,27px);font-weight:900;line-height:1.5;margin-bottom:18px}
+.why h3 em{font-style:normal;color:#23e0a0}
+.why p{color:#cfe0f6;font-size:14.5px;line-height:1.95}
+.why-list{display:grid;gap:14px}
+.why-item{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:18px 20px}
+.why-item svg{width:24px;height:24px;flex:none;color:#23e0a0;margin-top:2px}
+.why-item b{display:block;font-size:15px;font-weight:700;margin-bottom:3px}
+.why-item span{font-size:13px;color:#bcd0ea;line-height:1.7}
+
+/* ===== Audience split ===== */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.split-card{border-radius:20px;padding:40px 34px;color:#fff;position:relative;overflow:hidden;transition:.3s}
+.split-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.split-card.home{background:linear-gradient(150deg,#1565D8,#0E4FB0)}
+.split-card.biz{background:linear-gradient(150deg,#11324f,#1d5a8c)}
+.split-card .bigico{position:absolute;right:-10px;bottom:-14px;width:140px;height:140px;opacity:.13;color:#fff}
+.split-card .label{font-size:12px;font-weight:700;letter-spacing:.14em;opacity:.85}
+.split-card h3{font-size:24px;font-weight:900;margin:8px 0 12px}
+.split-card p{font-size:13.5px;color:rgba(255,255,255,.9);margin-bottom:22px;min-height:48px}
+.split-card .go{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);font-weight:700;font-size:14px;padding:12px 24px;border-radius:999px;transition:.2s}
+.split-card .go svg{width:16px;height:16px;transition:.2s}
+.split-card:hover .go svg{transform:translateX(4px)}
+
+/* ===== Cases (症状→対応→料金感) ===== */
+.case-group{margin-top:42px}
+.case-gtitle{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:900;color:var(--navy);margin-bottom:22px}
+.case-gtitle .pill{font-size:12px;font-weight:700;color:#fff;background:var(--primary);padding:4px 14px;border-radius:999px}
+.case-gtitle.biz .pill{background:var(--navy)}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.case{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.3s}
+.case:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.case-q{background:var(--sky);padding:20px 22px;display:flex;gap:12px;align-items:flex-start}
+.case-q svg{width:24px;height:24px;flex:none;color:var(--primary)}
+.case-q p{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.6}
+.case-body{padding:20px 22px;flex:1;display:flex;flex-direction:column}
+.case-step{font-size:11px;font-weight:700;color:var(--accent-d);letter-spacing:.1em;display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.case-step svg{width:15px;height:15px}
+.case-body .ans{font-size:13.5px;color:var(--text-mid);line-height:1.85;flex:1}
+.case-price{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:13px;color:var(--text-mid);display:flex;align-items:center;justify-content:space-between}
+.case-price b{font-size:17px;color:var(--navy);font-weight:900}
+.case-price b small{font-size:11px;font-weight:500;color:var(--text-light)}
+
+/* ===== Pricing ===== */
+.fee-base{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:18px;background:#fff}
+.fee-base .cell{padding:24px 20px;border-right:1px solid var(--line);text-align:center}
+.fee-base .cell:last-child{border-right:none}
+.fee-base .cell .t{font-size:13px;color:var(--text-mid);font-weight:700;margin-bottom:8px}
+.fee-base .cell .v{font-size:23px;font-weight:900;color:var(--navy)}
+.fee-base .cell .v.free{color:var(--accent-d)}
+.fee-base .cell .v small{font-size:12px;font-weight:700}
+.fee-base .cell .d{font-size:11.5px;color:var(--text-light);margin-top:6px;line-height:1.6}
+.promise{background:var(--accent-pale);border:1px solid #bdecd7;border-radius:14px;padding:18px 24px;display:flex;gap:14px;align-items:flex-start;margin-bottom:46px}
+.promise svg{width:26px;height:26px;flex:none;color:var(--accent-d);margin-top:2px}
+.promise p{font-size:13.5px;color:#0c6b4d;line-height:1.8}
+.promise b{font-weight:900}
+
+.tabs{display:flex;gap:10px;justify-content:center;margin-bottom:26px;flex-wrap:wrap}
+.tab{padding:12px 30px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:14.5px;color:var(--text-mid);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px}
+.tab svg{width:18px;height:18px}
+.tab.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 8px 18px rgba(21,101,216,.3)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fee-rows{display:grid;gap:14px}
+.fee-row{display:grid;grid-template-columns:130px 150px 1fr;gap:20px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;transition:.2s}
+.fee-row:hover{box-shadow:var(--shadow);border-color:var(--primary-l)}
+.fee-class{display:flex;flex-direction:column;gap:4px}
+.fee-class .cl{font-size:16px;font-weight:900;color:var(--navy)}
+.fee-bar{height:5px;border-radius:3px;background:var(--primary)}
+.fee-amt{font-size:18px;font-weight:900;color:var(--primary);white-space:nowrap}
+.fee-amt small{font-size:12px;color:var(--text-mid);font-weight:600}
+.fee-ex{font-size:13px;color:var(--text-mid);line-height:1.75}
+
+/* fee image cases */
+.feeimg{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:42px}
+.feeimg-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;border-left:5px solid var(--primary)}
+.feeimg-card.biz{border-left-color:var(--navy)}
+.feeimg-card .ftag{font-size:11px;font-weight:700;color:#fff;background:var(--primary);padding:3px 11px;border-radius:6px}
+.feeimg-card.biz .ftag{background:var(--navy)}
+.feeimg-card h4{font-size:14.5px;font-weight:700;color:var(--navy);margin:12px 0 14px;line-height:1.7;min-height:50px}
+.feeimg-card .total{font-size:13px;color:var(--text-mid);display:flex;align-items:baseline;gap:8px}
+.feeimg-card .total b{font-size:26px;font-weight:900;color:var(--accent-d)}
+.feeimg-card .brk{font-size:12px;color:var(--text-light);margin-top:6px}
+
+/* ===== Profile ===== */
+.profile{display:grid;grid-template-columns:.8fr 1.2fr;gap:46px;align-items:center}
+.prof-visual{position:relative}
+.prof-photo{aspect-ratio:3/4;border-radius:20px;background:linear-gradient(160deg,#1565D8,#0A2540);display:grid;place-items:center;color:rgba(255,255,255,.25);box-shadow:var(--shadow-lg);overflow:hidden;position:relative}
+.prof-photo svg{width:54%;height:54%}
+.prof-photo .ph-note{position:absolute;bottom:14px;left:0;width:100%;text-align:center;font-size:11px;color:rgba(255,255,255,.55)}
+.prof-name{position:absolute;left:-14px;bottom:24px;background:#fff;padding:14px 22px;border-radius:14px;box-shadow:var(--shadow)}
+.prof-name small{font-size:11px;color:var(--primary);font-weight:700;letter-spacing:.1em}
+.prof-name b{display:block;font-size:20px;font-weight:900;color:var(--navy)}
+.prof-name span{font-size:12px;color:var(--text-mid)}
+.prof-body .catch{font-size:clamp(20px,2.8vw,26px);font-weight:900;color:var(--navy);line-height:1.5;margin-bottom:18px}
+.prof-body .catch em{font-style:normal;color:var(--primary)}
+.prof-body p{font-size:14px;color:var(--text-mid);line-height:1.95;margin-bottom:16px}
+.career{display:grid;gap:10px;margin:22px 0}
+.career-item{display:flex;gap:14px;background:var(--sky2);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.career-item .yr{font-size:12px;font-weight:700;color:#fff;background:var(--primary);border-radius:8px;padding:4px 10px;height:fit-content;white-space:nowrap}
+.career-item .yr.now{background:var(--accent-d)}
+.career-item p{font-size:13px;margin:0;color:var(--text)}
+.career-item p b{color:var(--navy)}
+.quals{display:flex;flex-wrap:wrap;gap:9px}
+.qual{font-size:12.5px;font-weight:700;color:var(--primary-d);background:var(--sky);border:1px solid var(--line);padding:7px 14px;border-radius:999px;display:flex;align-items:center;gap:6px}
+.qual svg{width:14px;height:14px;color:var(--primary)}
+
+/* ===== Flow ===== */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.flow-step{text-align:center;padding:0 10px;position:relative}
+.flow-step:not(:last-child)::after{content:"";position:absolute;top:34px;right:-50%;width:100%;height:2px;background:var(--line);z-index:0}
+.flow-ico{width:68px;height:68px;margin:0 auto 16px;border-radius:50%;background:#fff;border:2px solid var(--primary);display:grid;place-items:center;color:var(--primary);position:relative;z-index:1}
+.flow-ico svg{width:30px;height:30px}
+.flow-step .st{font-size:11px;font-weight:700;color:var(--primary-l);letter-spacing:.1em}
+.flow-step h4{font-size:15px;font-weight:900;color:var(--navy);margin:4px 0 8px}
+.flow-step p{font-size:12.5px;color:var(--text-mid);line-height:1.7}
+.flow-step.freebadge .flow-ico{background:var(--accent);border-color:var(--accent);color:#fff}
+.flow-step.freebadge h4 small{display:inline-block;font-size:10px;background:var(--accent);color:#fff;padding:1px 7px;border-radius:5px;margin-left:4px;vertical-align:middle}
+
+/* ===== Blog ===== */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.blog-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.3s;cursor:pointer}
+.blog-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.blog-thumb{aspect-ratio:16/9;background:linear-gradient(135deg,var(--sky),#d4e6fb);display:grid;place-items:center;color:var(--primary-l)}
+.blog-thumb svg{width:46px;height:46px;opacity:.7}
+.blog-info{padding:20px}
+.blog-meta{display:flex;gap:10px;align-items:center;font-size:11.5px;margin-bottom:10px}
+.blog-date{color:var(--text-light)}
+.blog-cat{background:var(--sky);color:var(--primary-d);font-weight:700;padding:2px 9px;border-radius:6px}
+.blog-card h4{font-size:15px;font-weight:700;color:var(--navy);line-height:1.6}
+.blog-note{text-align:center;margin-top:26px;font-size:13px;color:var(--text-light)}
+
+/* ===== Company ===== */
+.company{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start}
+.comp-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.comp-table th,.comp-table td{text-align:left;padding:16px 22px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+.comp-table tr:last-child th,.comp-table tr:last-child td{border-bottom:none}
+.comp-table th{background:var(--sky2);width:130px;color:var(--navy);font-weight:700}
+.comp-table td{color:var(--text-mid)}
+.comp-area{background:linear-gradient(160deg,#1565D8,#0A2540);color:#fff;border-radius:var(--radius);padding:30px 28px}
+.comp-area svg.pin{width:34px;height:34px;color:#23e0a0;margin-bottom:12px}
+.comp-area h4{font-size:17px;font-weight:900;margin-bottom:10px}
+.comp-area p{font-size:13px;color:#cfe0f6;line-height:1.85}
+.comp-area .areas{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.comp-area .areas span{font-size:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:999px}
+
+/* ===== Contact ===== */
+.contact{background:linear-gradient(160deg,#0A2540,#0E3A6B);color:#fff;padding:80px 0}
+.contact .sec-head h2{color:#fff}
+.contact .sec-head p{color:#cfe0f6}
+.contact .sec-tag{color:#7fffcf}
+.cways{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:30px}
+.cway{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:30px 24px;text-align:center;transition:.3s;display:block}
+.cway:hover{transform:translateY(-5px);background:rgba(255,255,255,.12)}
+.cway .ci{width:60px;height:60px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center}
+.cway .ci svg{width:30px;height:30px;color:#fff}
+.cway.tel .ci{background:var(--primary)}
+.cway.line .ci{background:#06C755}
+.cway.mail .ci{background:var(--accent)}
+.cway h4{font-size:17px;font-weight:900;margin-bottom:6px}
+.cway .big{font-size:24px;font-weight:900;letter-spacing:.02em;margin:4px 0}
+.cway p{font-size:12.5px;color:#bcd0ea}
+.contact-note{text-align:center;font-size:13px;color:#bcd0ea}
+.contact-note b{color:#7fffcf;font-weight:700}
+
+/* ===== Footer ===== */
+footer{background:#071A2E;color:#9fb2c8;padding:46px 0 110px;font-size:13px}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap;margin-bottom:28px}
+.foot-logo b{font-size:20px;color:#fff;font-weight:900;display:block;margin-bottom:6px}
+.foot-logo p{max-width:380px;line-height:1.8}
+.foot-nav{display:flex;gap:24px;flex-wrap:wrap}
+.foot-nav a{transition:.2s}.foot-nav a:hover{color:#fff}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;font-size:12px;color:#6f86a0;text-align:center}
+
+/* ===== Sticky mobile CTA ===== */
+.sticky-cta{position:fixed;bottom:0;left:0;width:100%;z-index:250;display:none;background:#fff;box-shadow:0 -4px 20px rgba(10,37,64,.15);padding:8px;grid-template-columns:repeat(3,1fr);gap:8px}
+.sticky-cta a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px;border-radius:12px;font-size:11px;font-weight:700;color:#fff}
+.sticky-cta a svg{width:20px;height:20px}
+.sticky-cta .s-tel{background:var(--primary)}
+.sticky-cta .s-line{background:#06C755}
+.sticky-cta .s-mail{background:var(--accent)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* ===== Responsive ===== */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .hero-visual{max-width:420px}
+  .why{grid-template-columns:1fr;gap:30px;padding:40px 30px}
+  .profile{grid-template-columns:1fr;gap:34px}
+  .prof-visual{max-width:320px;margin:0 auto}
+  .company{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  html{scroll-padding-top:96px}
+  .site-header{top:40px}
+  .hero{padding-top:150px}
+  .nav{position:fixed;top:0;right:-100%;width:74%;max-width:320px;height:100vh;background:#fff;flex-direction:column;justify-content:center;gap:26px;box-shadow:-10px 0 40px rgba(0,0,0,.2);transition:.35s;padding:40px}
+  .nav.open{right:0}
+  .nav a.navlink{color:var(--navy)!important;font-size:17px}
+  .burger{display:flex;z-index:210}
+  .header-cta{display:none}
+  .reasons{grid-template-columns:1fr;gap:18px}
+  .cases{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .fee-base{grid-template-columns:1fr 1fr}
+  .fee-base .cell:nth-child(2){border-right:none}
+  .fee-base .cell:nth-child(1),.fee-base .cell:nth-child(2){border-bottom:1px solid var(--line)}
+  .fee-row{grid-template-columns:1fr;gap:10px;text-align:left}
+  .feeimg{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr;gap:30px 0}
+  .flow-step::after{display:none!important}
+  .blog-grid{grid-template-columns:1fr}
+  .cways{grid-template-columns:1fr}
+  .sticky-cta{display:grid}
+  .sec{padding:60px 0}
+  footer{padding-bottom:90px}
+}
+@media(max-width:480px){
+  .wrap{padding:0 18px}
+  .fee-base{grid-template-columns:1fr}
+  .fee-base .cell{border-right:none!important;border-bottom:1px solid var(--line)!important}
+  .flow{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">デザイン確認用のデモサイト（DEMO）です／本番はクライアント様サーバーへ移行します</div>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+      </span>
+      <span class="logo-txt"><b>ロックスミス</b><span class="logo-en">LOCKSMITH</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#reasons" class="navlink">選ばれる理由</a>
+      <a href="#cases" class="navlink">解決事例</a>
+      <a href="#fee" class="navlink">料金</a>
+      <a href="#profile" class="navlink">代表者</a>
+      <a href="#blog" class="navlink">お役立ち情報</a>
+      <a href="#contact" class="header-cta">無料相談する</a>
+    </nav>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3 4-3 9-3 9 1.34 9 3z" opacity=".0"/><circle cx="12" cy="12" r="9"/></svg>
+        湘南・藤沢のITネットワークサポート
+      </span>
+      <h1>ネットのトラブル、<br><span class="u">直らなければ</span><br><span class="free">出張費も含めて0円。</span></h1>
+      <p class="lead">専門用語は一切使いません。<br>金融機関のネットワークを手がける<strong style="color:#fff">現役のITプロフェッショナル</strong>が、ご家庭やお店の「困った」を“分かりやすい言葉”で解決します。</p>
+      <div class="area">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        藤沢市を中心に、湘南エリア・神奈川県内全域へ出張対応（一部非対応エリアあり）
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          まずは無料で相談する
+        </a>
+        <a href="#fee" class="btn btn-ghost">
+          料金を見る
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hv-float">相談・見積<br>0円</div>
+      <div class="hv-card">
+        <div class="hv-row">
+          <span class="hv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121 0M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12" y2="20"/></svg></span>
+          <div><b>Wi-Fiが2階に届かない</b><span>家じゅう快適に繋がる環境へ</span><span class="hv-tag">8,000円〜</span></div>
+        </div>
+        <div class="hv-row">
+          <span class="hv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+          <div><b>急にネットが繋がらない</b><span>その場で原因を切り分け復旧</span><span class="hv-tag">即日対応</span></div>
+        </div>
+        <div class="hv-row">
+          <span class="hv-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></span>
+          <div><b>店舗のネットを安全に分けたい</b><span>POS・業務用と来客Wi-Fiを分離</span><span class="hv-tag">法人対応</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#ffffff" d="M0,40 C360,70 720,10 1080,30 C1260,40 1380,50 1440,45 L1440,60 L0,60 Z"></path></svg>
+</section>
+
+<!-- REASONS -->
+<section class="sec" id="reasons">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">WHY LOCKSMITH</span>
+      <h2>ロックスミスが選ばれる<span class="hl">3つの理由</span></h2>
+      <p>「頼んでよかった」と思っていただくために。私たちが大切にしていること。</p>
+    </div>
+    <div class="reasons">
+      <div class="reason reveal">
+        <span class="num">REASON 01</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>完全成功報酬<br>（ノーリスク）</h3>
+        <p>ご相談・お見積りは完全無料。お見積りにご納得いただき、問題が解決した場合のみお支払いいただきます。万が一直らなければ、出張費を含めて0円です。</p>
+      </div>
+      <div class="reason reveal">
+        <span class="num">REASON 02</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg></div>
+        <h3>ITの翻訳家<br>（伝わる対応）</h3>
+        <p>対応するのは「技術営業（プリセールス）」のプロ。難しいIT用語は使わず、お客様の目線で“何に困っていて、どうしたいのか”を丁寧に伺い、最適な解決策をご提案します。</p>
+      </div>
+      <div class="reason reveal">
+        <span class="num">REASON 03</span>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3>圧倒的な<br>低価格</h3>
+        <p>地域密着での対応にこだわることで、移動や運営のコストを極限まで抑制。エンタープライズ品質のサポートを、ご家庭やお店でも頼みやすい価格でご提供します。</p>
+      </div>
+    </div>
+
+    <!-- WHY 0yen -->
+    <div class="why reveal" style="margin-top:54px">
+      <div>
+        <h3>なぜ「直らなければ<em>0円</em>」が<br>言い切れるのか？</h3>
+        <p>それは、私たちが日々“失敗の許されない現場”で技術を磨いているから。極めて厳格なセキュリティ水準が求められる金融機関のネットワーク提案を手がける現役のプロが対応します。確かな技術力があるからこそ、結果にコミットできます。</p>
+      </div>
+      <div class="why-list">
+        <div class="why-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div><b>金融系ネットワークの実務経験</b><span>大手ITインフラ企業で、銀行・信用金庫クラスのセキュアな基盤構築・提案を担当。</span></div>
+        </div>
+        <div class="why-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <div><b>家庭用〜業務用まで幅広く対応</b><span>マンション・店舗・ホテル・オフィスのネットワーク構築まで、約10年の現場知見。</span></div>
+        </div>
+        <div class="why-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div><b>原因の「切り分け」が速い</b><span>回線・機器・設定のどこに問題があるかを的確に診断。ムダな作業や費用が発生しません。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE SPLIT -->
+<section class="sec alt" id="audience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">FOR YOU</span>
+      <h2>あなたの「お困りごと」は<br class="sp-br">どちらですか？</h2>
+      <p>ご家庭のトラブルも、店舗・オフィスの課題も。どちらもお任せください。</p>
+    </div>
+    <div class="split">
+      <a href="#case-home" class="split-card home reveal">
+        <svg class="bigico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span class="label">FOR HOME</span>
+        <h3>個人・ご家庭のお客様</h3>
+        <p>Wi-Fiが届かない／急に繋がらない／新しいPC・プリンターの設定など、暮らしのネットのお悩みに。</p>
+        <span class="go">解決事例を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a href="#case-biz" class="split-card biz reveal">
+        <svg class="bigico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h.01M9 13h.01M9 17h.01M13 9h4M13 13h4M13 17h4"/></svg>
+        <span class="label">FOR BUSINESS</span>
+        <h3>店舗・小規模オフィスのお客様</h3>
+        <p>業務用と来客用Wi-Fiの分離／頻繁なネット切断／NAS導入によるデータ共有など、事業のネット課題に。</p>
+        <span class="go">解決事例を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="sec" id="cases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">SOLUTION CASES</span>
+      <h2>お悩み別・<span class="hl">解決ケース</span></h2>
+      <p>「症状」→「対応」→「料金の目安」が一目で分かります。あなたのケースを探してみてください。</p>
+    </div>
+
+    <!-- Home cases -->
+    <div class="case-group reveal" id="case-home">
+      <div class="case-gtitle">
+        <span class="pill">個人・ご家庭</span>よくあるご相談
+      </div>
+      <div class="cases">
+        <div class="case">
+          <div class="case-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121 0M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12" y2="20"/></svg><p>Wi-Fiの電波が寝室や2階に届かない…</p></div>
+          <div class="case-body">
+            <div class="case-step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>こう解決します</div>
+            <p class="ans">お家の構造を調査し、どこにいてもサクサク繋がる最適なWi-Fi環境（メッシュWi-Fiなど）をご提案・構築します。</p>
+            <div class="case-price">料金の目安<b>15,000円〜<small>（基本+Advanced）</small></b></div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><p>突然インターネットに繋がらない！原因も不明…</p></div>
+          <div class="case-body">
+            <div class="case-step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>こう解決します</div>
+            <p class="ans">ルーターの故障か、回線の問題か、端末の設定か。プロが迅速に原因を切り分け、その場で復旧させます。</p>
+            <div class="case-price">料金の目安<b>10,000円〜<small>（基本+Standard）</small></b></div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><p>新しいPCやプリンターの初期設定がお手上げ…</p></div>
+          <div class="case-body">
+            <div class="case-step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>こう解決します</div>
+            <p class="ans">箱から出すところからお任せください。Wi-Fi接続、メール設定、古いPCからのデータ移行まで丸ごとサポートします。</p>
+            <div class="case-price">料金の目安<b>8,000円〜<small>（基本+Light）</small></b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Biz cases -->
+    <div class="case-group reveal" id="case-biz">
+      <div class="case-gtitle biz">
+        <span class="pill">店舗・小規模オフィス</span>よくあるご相談
+      </div>
+      <div class="cases">
+        <div class="case">
+          <div class="case-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><p>お客様用Wi-Fiと業務用ネットを安全に分けたい</p></div>
+          <div class="case-body">
+            <div class="case-step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>こう解決します</div>
+            <p class="ans">BGMシステムやPOSレジ用ネットワークと、来店客用Wi-Fiを完全に分離。セキュリティ事故を防ぐセキュアな環境を構築します。</p>
+            <div class="case-price">料金の目安<b>15,000円〜<small>（基本+Advanced）</small></b></div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg><p>社内のネットが頻繁に途切れて業務に支障が…</p></div>
+          <div class="case-body">
+            <div class="case-step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>こう解決します</div>
+            <p class="ans">家庭用ルーターの限界かもしれません。オフィスの規模に合わせ、安定稼働する業務用機器（Cisco製品など）へのリプレイスを提案・設定します。</p>
+            <div class="case-price">料金の目安<b>15,000円〜<small>（基本+Advanced）</small></b></div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0018 0V5"/><path d="M3 12a9 3 0 0018 0"/></svg><p>NASを導入して社員間で安全にデータ共有したい</p></div>
+          <div class="case-body">
+            <div class="case-step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>こう解決します</div>
+            <p class="ans">機器の選定から、適切なアクセス権限の設定、万が一に備えた自動バックアップ環境の構築まで一貫して行います。</p>
+            <div class="case-price">料金の目安<b>15,000円〜<small>（基本+Advanced）</small></b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEE -->
+<section class="sec alt" id="fee">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">PRICE</span>
+      <h2>明朗会計の<span class="hl">料金システム</span></h2>
+      <p>「基本料金」＋「作業費用」のシンプルな構成。事前のお見積りにご納得いただいてから作業します。</p>
+    </div>
+
+    <!-- base fee -->
+    <div class="fee-base reveal">
+      <div class="cell"><div class="t">事前ご相談</div><div class="v free">無料</div><div class="d">メール・お電話・LINEでのご相談</div></div>
+      <div class="cell"><div class="t">基本料金</div><div class="v">5,000<small>円</small></div><div class="d">出張費＋原因調査＋お見積り作成</div></div>
+      <div class="cell"><div class="t">作業費用</div><div class="v">3,000<small>〜</small>20,000<small>円</small></div><div class="d">症状・難易度に応じた技術料</div></div>
+      <div class="cell"><div class="t">追加工事・機材</div><div class="v" style="font-size:18px">別途お見積り</div><div class="d">特殊配線・機器購入が必要な場合のみ</div></div>
+    </div>
+    <div class="promise reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      <p><b>※お約束※</b>　事前にお見積りを提示し、ご納得いただいた場合のみ作業を開始します。もし解決できなかった場合や、お見積りにご納得いただけずキャンセルされた場合、<b>基本料金（出張費）はいただきません（0円）。</b></p>
+    </div>
+
+    <!-- tabs -->
+    <div class="tabs reveal">
+      <button class="tab active" data-tab="home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        個人・ご家庭向け
+      </button>
+      <button class="tab" data-tab="biz">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h.01M9 13h.01M13 9h4M13 13h4"/></svg>
+        店舗・オフィス向け
+      </button>
+    </div>
+
+    <!-- home panel -->
+    <div class="tab-panel active" data-panel="home">
+      <div class="fee-rows">
+        <div class="fee-row"><div class="fee-class"><span class="cl">Light</span><span class="fee-bar" style="width:30%"></span></div><div class="fee-amt">3,000〜5,000<small>円</small></div><div class="fee-ex">Wi-Fiルーターの新規設置・回線開通後の接続設定、プリンターのWi-Fi設定、メールの送受信トラブル解決</div></div>
+        <div class="fee-row"><div class="fee-class"><span class="cl">Standard</span><span class="fee-bar" style="width:50%"></span></div><div class="fee-amt">5,000〜10,000<small>円</small></div><div class="fee-ex">突然ネットに繋がらない原因の調査と復旧、パソコンの初期設定・データ移行、Wi-Fi中継機の設置・設定</div></div>
+        <div class="fee-row"><div class="fee-class"><span class="cl">Advanced</span><span class="fee-bar" style="width:75%"></span></div><div class="fee-amt">10,000〜20,000<small>円</small></div><div class="fee-ex">家庭内LANの配線見直しと再構築、メッシュWi-Fiの構築、家庭用NASの導入と自動バックアップ設定</div></div>
+        <div class="fee-row"><div class="fee-class"><span class="cl">Expert</span><span class="fee-bar" style="width:100%"></span></div><div class="fee-amt">20,000〜30,000<small>円</small></div><div class="fee-ex">複数階・広範囲にまたがる有線/無線LANの最適化、高度なセキュリティ・通信制御設定、特殊機器のネットワーク組み込み</div></div>
+      </div>
+    </div>
+
+    <!-- biz panel -->
+    <div class="tab-panel" data-panel="biz">
+      <div class="fee-rows">
+        <div class="fee-row"><div class="fee-class"><span class="cl">Light</span><span class="fee-bar" style="width:30%"></span></div><div class="fee-amt">3,000〜5,000<small>円</small></div><div class="fee-ex">従業員用PCのネットワーク参加設定、業務用複合機のネットワーク設定、共有フォルダのアクセス権限の簡易設定</div></div>
+        <div class="fee-row"><div class="fee-class"><span class="cl">Standard</span><span class="fee-bar" style="width:50%"></span></div><div class="fee-amt">5,000〜10,000<small>円</small></div><div class="fee-ex">業務影響が出ているネットワーク障害の一次切り分けと復旧、来客用・ゲスト用Wi-Fiの安全な構築、VPNクライアントの設定</div></div>
+        <div class="fee-row"><div class="fee-class"><span class="cl">Advanced</span><span class="fee-bar" style="width:75%"></span></div><div class="fee-amt">10,000〜20,000<small>円</small></div><div class="fee-ex">店舗用BGM・POSレジ用ネットワークの独立構築、ネットワークカメラ複数台導入、ルーター・スイッチ等のリプレイス</div></div>
+        <div class="fee-row"><div class="fee-class"><span class="cl">Expert</span><span class="fee-bar" style="width:100%"></span></div><div class="fee-amt">20,000〜30,000<small>円</small></div><div class="fee-ex">Cisco Catalyst等のエンタープライズ機器の導入・設定、VLAN分割、クラウド接続</div></div>
+      </div>
+    </div>
+
+    <!-- fee image -->
+    <h3 class="zen reveal" style="text-align:center;font-size:20px;color:var(--navy);margin:54px 0 8px">料金イメージ（実際のご依頼例）</h3>
+    <p class="reveal" style="text-align:center;color:var(--text-mid);font-size:14px;margin-bottom:8px">「基本料金5,000円＋作業費用」での目安です。</p>
+    <div class="feeimg">
+      <div class="feeimg-card reveal"><span class="ftag">個人・家庭</span><h4>新しく買ったWi-Fiルーターの設置と、スマホ・PC・テレビへの接続設定を丸ごとお任せしたい</h4><div class="total">合計<b>8,000円</b><small>（税込）</small></div><div class="brk">内訳：基本料金 5,000円 ＋ 作業費用 3,000円（Light）</div></div>
+      <div class="feeimg-card reveal"><span class="ftag">個人・家庭</span><h4>テレワーク中のWeb会議が途切れる。家じゅうどこでも繋がるメッシュWi-Fi環境を構築してほしい</h4><div class="total">合計<b>15,000円</b><small>（税込）</small></div><div class="brk">内訳：基本料金 5,000円 ＋ 作業費用 10,000円（Advanced）</div></div>
+      <div class="feeimg-card biz reveal"><span class="ftag">店舗・オフィス</span><h4>POSレジから本部への売上レポートが送れない。原因究明と復旧を支援してほしい</h4><div class="total">合計<b>15,000円</b><small>（税込）</small></div><div class="brk">内訳：基本料金 5,000円 ＋ 作業費用 10,000円（Standard）</div></div>
+      <div class="feeimg-card biz reveal"><span class="ftag">店舗・オフィス</span><h4>無線LAN刷新に伴い業務用アクセスポイントを導入し、セキュアで途切れない社内ネットワークを構築したい</h4><div class="total">合計<b>30,000円</b><small>（税込）</small></div><div class="brk">内訳：基本料金 5,000円 ＋ 作業費用 25,000円（Expert）／※別途 機器費用＋工事費用</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="sec" id="profile">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">PROFILE</span>
+      <h2>対応するのは、<span class="hl">「ITの翻訳家」</span></h2>
+      <p>純粋なエンジニアではなく「技術営業」。だから、伝わる。</p>
+    </div>
+    <div class="profile">
+      <div class="prof-visual reveal">
+        <div class="prof-photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="ph-note">※本番では代表者様のお写真を掲載</span>
+        </div>
+        <div class="prof-name">
+          <small>代表</small>
+          <b>岩井 裕</b>
+          <span>いわい ゆう／現役ネットワーク技術営業</span>
+        </div>
+      </div>
+      <div class="prof-body">
+        <p class="catch reveal">お客様の「困った」を、<em>分かりやすい言葉</em>で解決します。</p>
+        <p class="reveal">通信・ネットワーク業界で約10年。現在は外資系ITインフラ企業で、極めて厳格なセキュリティ水準が求められる金融機関向けのネットワーク提案営業を担っています。最大の強みは、純粋なエンジニアではなく「技術営業」であること。「専門用語ばかりで分からない」というハードルを取り払い、技術とお客様の“橋渡し役”として最適な解決策をご提案します。</p>
+        <div class="career reveal">
+          <div class="career-item"><span class="yr">5年</span><p><b>通信インフラベンダー</b>／マンション・オフィス向けのWi-Fi・通信インフラ導入</p></div>
+          <div class="career-item"><span class="yr">4年</span><p><b>店舗向け通信サービス企業</b>／店舗・ホテル・商業施設のネットワーク構築、POSシステム等ICTソリューション導入</p></div>
+          <div class="career-item"><span class="yr now">現在</span><p><b>外資系ITインフラ企業</b>／金融機関・医療機関などのセキュアなネットワーク機器導入・インフラ刷新の提案</p></div>
+        </div>
+        <div class="quals reveal">
+          <span class="qual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 13.5L7 22l5-3 5 3-2-8.5"/></svg>Cisco CCNA</span>
+          <span class="qual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 13.5L7 22l5-3 5 3-2-8.5"/></svg>AWS Certified Cloud Practitioner</span>
+          <span class="qual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 13.5L7 22l5-3 5 3-2-8.5"/></svg>情報セキュリティマネジメント</span>
+          <span class="qual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></svg>TOEIC 760点</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="sec alt" id="flow">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">FLOW</span>
+      <h2>ご利用の<span class="hl">流れ</span></h2>
+      <p>ご相談からお支払いまで。納得いただいてからの作業なので安心です。</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step freebadge reveal">
+        <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <span class="st">STEP 01</span>
+        <h4>ご相談<small>無料</small></h4>
+        <p>メール・電話・LINEでお気軽に。症状や状況をお聞かせください。</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <span class="st">STEP 02</span>
+        <h4>訪問・調査</h4>
+        <p>ご自宅・店舗へ出張し、原因を切り分け・診断します。</p>
+      </div>
+      <div class="flow-step freebadge reveal">
+        <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/></svg></div>
+        <span class="st">STEP 03</span>
+        <h4>お見積り<small>無料</small></h4>
+        <p>作業内容と料金を明確にご提示。ご納得いただいてから進めます。</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <span class="st">STEP 04</span>
+        <h4>作業・解決</h4>
+        <p>プロが確実に作業。運用方法も分かりやすくご説明します。</p>
+      </div>
+      <div class="flow-step reveal">
+        <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <span class="st">STEP 05</span>
+        <h4>お支払い</h4>
+        <p>解決した場合のみお支払い。直らなければ0円です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="sec" id="blog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">USEFUL INFO</span>
+      <h2>お役立ち情報・<span class="hl">ブログ</span></h2>
+      <p>ネットやWi-Fiにまつわる豆知識を、分かりやすくお届けします。</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <div class="blog-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121 0M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12" y2="20"/></svg></div>
+        <div class="blog-info">
+          <div class="blog-meta"><span class="blog-cat">Wi-Fi</span><span class="blog-date">2026.05.01</span></div>
+          <h4>2階までWi-Fiが届かない原因と、今すぐできる3つの対策</h4>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h.01M9 13h4M13 9h2"/></svg></div>
+        <div class="blog-info">
+          <div class="blog-meta"><span class="blog-cat">店舗向け</span><span class="blog-date">2026.04.28</span></div>
+          <h4>お店のフリーWi-Fi、業務用と分けないと危険な理由</h4>
+        </div>
+      </div>
+      <div class="blog-card reveal">
+        <div class="blog-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="blog-info">
+          <div class="blog-meta"><span class="blog-cat">PC設定</span><span class="blog-date">2026.04.20</span></div>
+          <h4>新しいパソコン、買ったらまずやるべき初期設定リスト</h4>
+        </div>
+      </div>
+    </div>
+    <p class="blog-note">※ブログ機能はWordPress標準機能で実装します（カテゴリ・パンくず・内部リンクをSEO観点で整備）。上記はデモ用のサンプル記事です。</p>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section class="sec alt" id="company">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">COMPANY</span>
+      <h2>事業者概要・<span class="hl">対応エリア</span></h2>
+    </div>
+    <div class="company">
+      <table class="comp-table reveal">
+        <tr><th>屋号</th><td>ロックスミス</td></tr>
+        <tr><th>代表者名</th><td>岩井 裕（いわい ゆう）</td></tr>
+        <tr><th>創業</th><td>2026年4月20日</td></tr>
+        <tr><th>所在地</th><td>〒220-0072<br>神奈川県横浜市西区浅間町1丁目4番3号 ウィザードビル402</td></tr>
+        <tr><th>事業内容</th><td>店舗・オフィス向けITインフラ構築／監視カメラ構築／ITサポート／PC・スマートフォンキッティング</td></tr>
+      </table>
+      <div class="comp-area reveal">
+        <svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h4>出張対応エリア</h4>
+        <p>神奈川県藤沢市を中心に、湘南エリア・県内全域へ出張対応します（一部非対応エリアあり）。エリア外の方もまずはお気軽にご相談ください。</p>
+        <div class="areas"><span>藤沢市</span><span>茅ヶ崎市</span><span>鎌倉市</span><span>横浜市</span><span>平塚市</span><span>湘南エリア</span><span>神奈川県内</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">CONTACT</span>
+      <h2>まずは無料でご相談ください</h2>
+      <p>ご相談・お見積りは無料です。「こんなこと聞いていいのかな？」という些細な疑問でもお気軽にどうぞ。</p>
+    </div>
+    <div class="cways">
+      <a href="tel:000-0000-0000" class="cway tel reveal">
+        <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.32.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1H7.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.23 1.01L6.6 10.8z"/></svg></div>
+        <h4>お電話</h4>
+        <div class="big">000-0000-0000</div>
+        <p>受付：平日 9:00〜18:00（仮）</p>
+      </a>
+      <a href="#" class="cway line reveal">
+        <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+        <h4>LINEで相談</h4>
+        <div class="big" style="font-size:18px">友だち追加して相談</div>
+        <p>写真を送るだけでもOK・24時間受付</p>
+      </a>
+      <a href="#" class="cway mail reveal">
+        <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></div>
+        <h4>メールフォーム</h4>
+        <div class="big" style="font-size:18px">24時間受付中</div>
+        <p>お問い合わせフォームから送信</p>
+      </a>
+    </div>
+    <p class="contact-note"><b>相談・お見積りは完全無料。</b>　直らなければ出張費も含めて0円です。お気軽にお問い合わせください。</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-logo">
+        <b>ロックスミス</b>
+        <p>神奈川県藤沢市を中心とした湘南エリアの、出張型ITネットワークサポート。ご家庭・店舗の「直らなければ0円」のネットワークソリューション。</p>
+      </div>
+      <nav class="foot-nav">
+        <a href="#reasons">選ばれる理由</a>
+        <a href="#cases">解決事例</a>
+        <a href="#fee">料金</a>
+        <a href="#profile">代表者</a>
+        <a href="#blog">お役立ち情報</a>
+        <a href="#company">事業者概要</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">© 2026 Locksmith. All rights reserved.　｜　本ページはデザイン確認用のデモサイトです。</div>
+  </div>
+</footer>
+
+<!-- Sticky mobile CTA -->
+<div class="sticky-cta">
+  <a href="tel:000-0000-0000" class="s-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.32.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1H7.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.23 1.01L6.6 10.8z"/></svg>電話</a>
+  <a href="#" class="s-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>LINE</a>
+  <a href="#contact" class="s-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>相談</a>
+</div>
+
+<script>
+// header scroll + hero state
+const header=document.getElementById('header');
+const hero=document.getElementById('top');
+function onScroll(){
+  if(window.scrollY>40)header.classList.add('scrolled');else header.classList.remove('scrolled');
+  const hb=hero.getBoundingClientRect().bottom;
+  if(hb>80 && window.scrollY<window.innerHeight-90)header.classList.add('hero-on');else header.classList.remove('hero-on');
+}
+window.addEventListener('scroll',onScroll);onScroll();
+
+// burger
+const burger=document.getElementById('burger'),nav=document.getElementById('nav');
+burger.addEventListener('click',()=>nav.classList.toggle('open'));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+// tabs
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const k=t.dataset.tab;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===k));
+  });
+});
+
+// reveal
+const ob=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');ob.unobserve(el.target)}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ob.observe(el));
+</script>
+</body>
+</html>
